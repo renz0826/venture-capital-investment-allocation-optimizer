@@ -102,4 +102,28 @@ if __name__ == "__main__":
         Startup(9, "Peer-to-Peer Micro-lending", 500000, 1200000),
         Startup(10, "Next-Gen Battery Tech", 4200000, 11500000)
     ]
+
+    # --- Execute Greedy Heuristic ---
+    print("--- 1. ROI-BASED GREEDY HEURISTIC ---")
+    g_profit, g_list, g_leftover = run_greedy_heuristic(dataset, TOTAL_BUDGET)
+    print(f"Total Projected Profit: ${g_profit:,}")
+    print(f"Unused Capital: ${g_leftover:,}")
+    print("Funded Portfolio:")
+    for s in g_list:
+        print(f"  - {s.id}{s.name} (Cost: ${s.capital:,})")
+
+    print("\n" + "="*40 + "\n")
+
+    # --- Execute Dynamic Programming ---
+    print("--- 2. TOP-DOWN DYNAMIC PROGRAMMING ---")
+    dp_profit, dp_list = run_dynamic_programming(dataset, TOTAL_BUDGET)
+    
+    # Calculate DP leftover budget manually
+    dp_cost = sum(s.capital for s in dp_list)
+    dp_leftover = TOTAL_BUDGET - dp_cost
+    
+    print(f"Total Guaranteed Profit: ${dp_profit:,}")
+    print(f"Unused Capital: ${dp_leftover:,}")
+    print("Optimal Funded Portfolio:")
+    for s in reversed(dp_list): # Reversed just for cleaner display order
         print(f"  -{s.id} {s.name} (Cost: ${s.capital:,})")
