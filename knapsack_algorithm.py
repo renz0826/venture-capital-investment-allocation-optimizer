@@ -125,5 +125,5 @@ if __name__ == "__main__":
     print(f"Total Guaranteed Profit: ${dp_profit:,}")
     print(f"Unused Capital: ${dp_leftover:,}")
     print("Optimal Funded Portfolio:")
-    for s in reversed(dp_list): # Reversed just for cleaner display order
+    for s in (dp_list): 
         print(f"  -{s.id} {s.name} (Cost: ${s.capital:,})")
