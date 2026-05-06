@@ -113,7 +113,7 @@ if __name__ == "__main__":
     print(f"Total Projected Profit: ${g_profit:,}")
     print("Funded Portfolio:")
     for s in g_list:
-        print(f"  - {s.id}{s.name} (Cost: ${s.capital:,})")
+        print(f"  - {s.id} {s.name} (Cost: ${s.capital:,})")
 
         
 
