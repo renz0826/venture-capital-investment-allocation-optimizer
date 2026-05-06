@@ -80,4 +80,26 @@ def run_dynamic_programming(startups, budget):
 
     # Start the recursive chain from the last index
     return dp(len(startups) - 1, budget)
+
+# ==========================================
+# EXPERIMENTAL DATASET & EXECUTION
+# ==========================================
+
+if __name__ == "__main__":
+    # The $10,000,000 Venture Capital Budget
+    TOTAL_BUDGET = 10000000
+
+    # The 10-Startup Dataset
+    dataset = [
+        Startup(1, "Quantum Encryption Solutions", 4500000, 12000000),
+        Startup(2, "Cloud Kitchen Logistics", 1200000, 3100000),
+        Startup(3, "Agritech Drone Surveying", 800000, 2200000),
+        Startup(4, "VR Surgical Training", 2500000, 6500000),
+        Startup(5, "Blockchain Supply Chain", 3000000, 8000000),
+        Startup(6, "AI Customer Support Bots", 600000, 1500000),
+        Startup(7, "Smart Grid Energy Analytics", 1800000, 4800000),
+        Startup(8, "Telehealth Diagnostics", 2200000, 5900000),
+        Startup(9, "Peer-to-Peer Micro-lending", 500000, 1200000),
+        Startup(10, "Next-Gen Battery Tech", 4200000, 11500000)
+    ]
         print(f"  -{s.id} {s.name} (Cost: ${s.capital:,})")
