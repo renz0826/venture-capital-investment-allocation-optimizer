@@ -20,6 +20,7 @@ def run_greedy_heuristic(startups, budget):
     # Sort startups descending by ROI ratio
     sorted_startups = sorted(startups, key=lambda x: x.ratio, reverse=True)
     
+    total_cost = 0
     total_profit = 0
     funded_startups = []
     remaining_budget = budget
@@ -28,10 +29,11 @@ def run_greedy_heuristic(startups, budget):
     for startup in sorted_startups:
         if startup.capital <= remaining_budget:
             remaining_budget -= startup.capital
+            total_cost +=startup.capital
             total_profit += startup.profit
             funded_startups.append(startup)
             
-    return total_profit, funded_startups, remaining_budget
+    return total_cost, total_profit, funded_startups, remaining_budget
 
 def run_dynamic_programming(startups, budget):
     """
@@ -105,12 +107,15 @@ if __name__ == "__main__":
 
     # --- Execute Greedy Heuristic ---
     print("--- 1. ROI-BASED GREEDY HEURISTIC ---")
-    g_profit, g_list, g_leftover = run_greedy_heuristic(dataset, TOTAL_BUDGET)
-    print(f"Total Projected Profit: ${g_profit:,}")
+    g_total_cost, g_profit, g_list, g_leftover = run_greedy_heuristic(dataset, TOTAL_BUDGET)
+    print(f"Total Cost: ${g_total_cost: ,}")
     print(f"Unused Capital: ${g_leftover:,}")
+    print(f"Total Projected Profit: ${g_profit:,}")
     print("Funded Portfolio:")
     for s in g_list:
         print(f"  - {s.id}{s.name} (Cost: ${s.capital:,})")
+
+        
 
     print("\n" + "="*40 + "\n")
 
@@ -121,9 +126,12 @@ if __name__ == "__main__":
     # Calculate DP leftover budget manually
     dp_cost = sum(s.capital for s in dp_list)
     dp_leftover = TOTAL_BUDGET - dp_cost
-    
-    print(f"Total Guaranteed Profit: ${dp_profit:,}")
+
+    print(f"Total Cost: ${dp_cost:,}")
     print(f"Unused Capital: ${dp_leftover:,}")
+    print(f"Total Guaranteed Profit: ${dp_profit:,}")
     print("Optimal Funded Portfolio:")
     for s in (dp_list): 
         print(f"  -{s.id} {s.name} (Cost: ${s.capital:,})")
+
+    
